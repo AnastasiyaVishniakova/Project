@@ -1,0 +1,11 @@
+commit 0caa776e94c9843533b17dfe3ddf98f8a02fe708 (HEAD -> master)
+Author: git config --global user.name Anastasiya <CherryMonster_13@mail.ru>
+Date:   Sun Feb 11 13:14:51 2018 +0300
+
+    status.txt added
+
+commit d874ff46c4ab6a121f25aa19aeb26f205bc5f884
+Author: git config --global user.name Anastasiya <CherryMonster_13@mail.ru>
+Date:   Sun Feb 11 13:10:39 2018 +0300
+
+    add gitignore
