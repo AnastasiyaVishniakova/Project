@@ -1,0 +1,30 @@
+
+.error-content{
+    flex-direction: column;
+    margin: auto auto;
+}
+
+.error-text{
+    margin-top: 3rem;
+    margin-right: 6rem;
+    font-size: 2em;
+}
+
+.error-text-small{
+    padding-left: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 1.5em;
+}
+
+.return{
+    max-height: 100%;
+    margin-bottom: 2rem;
+    margin-left: 4.3rem;
+}
+
+.return img{
+    height: 2.2rem;
+    width: auto;
+    cursor: pointer;
+}

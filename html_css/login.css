@@ -1,0 +1,38 @@
+
+.log-content{
+    display: flex;
+    flex-direction: column;
+    margin: 3rem auto;
+    padding-bottom: 3rem;
+}
+
+.log-content span{
+    margin: 0 auto;
+    font-size: 1.8rem;
+}
+
+.input-info{
+    margin: 0 auto;
+    font-weight: bold;
+    margin-top: 1rem;
+    
+}
+
+.input-info input{
+    background-color:  rgba(235, 235, 235, 0.7);
+    border: 1rem;
+    border-radius: 2rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.ok{
+    max-height: 100%;
+    margin: 1.5rem auto;
+}
+
+.ok img{
+    height: 2.2rem;
+    width: auto;
+    cursor: pointer;
+}
