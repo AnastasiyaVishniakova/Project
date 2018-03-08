@@ -1,8 +1,8 @@
-var a = (
+var utils = (function(){
   photoPosts = [
     {
       id: '1',
-      descriprion: 'Я в Турции',
+      description: 'Я в Турции',
       createdAt: new Date('2017-02-23T23:00:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\01.jpg'
@@ -10,7 +10,7 @@ var a = (
 
     {
       id: '2',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2016-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\02.jpg'
@@ -18,7 +18,7 @@ var a = (
 
     {
       id: '3',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2018-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\03.jpg'
@@ -26,7 +26,7 @@ var a = (
 
     {
       id: '4',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2015-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\04.jpg'
@@ -34,7 +34,7 @@ var a = (
 
     {
       id: '5',
-      descriprion: 'Я в Турции',
+      description: 'Я в Турции',
       createdAt: new Date('2017-02-23T23:00:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\01.jpg'
@@ -42,7 +42,7 @@ var a = (
 
     {
       id: '6',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2016-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\02.jpg'
@@ -50,7 +50,7 @@ var a = (
 
     {
       id: '7',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2018-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\03.jpg'
@@ -58,7 +58,7 @@ var a = (
 
     {
       id: '8',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2015-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\04.jpg'
@@ -66,7 +66,7 @@ var a = (
 
     {
       id: '9',
-      descriprion: 'Я в Турции',
+      description: 'Я в Турции',
       createdAt: new Date('2017-02-23T23:00:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\01.jpg'
@@ -74,7 +74,7 @@ var a = (
 
     {
       id: '10',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2016-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\02.jpg'
@@ -82,7 +82,7 @@ var a = (
 
     {
       id: '11',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2018-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\03.jpg'
@@ -90,12 +90,12 @@ var a = (
 
     {
       id: '12',
-      descriprion: 'Я дома в шапке',
+      description: 'Я дома в шапке',
       createdAt: new Date('2015-01-23T23:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\04.jpg'
     }
-  ],
+  ];
 
   function getPhotoPosts(skip = 0, top = 10, filterConfig) {
     var arr = photoPosts;
@@ -112,7 +112,7 @@ var a = (
     });
 
     return arr;
-  },
+  };
 
   function getPhotoPost(id) {
     var res = null;
@@ -120,23 +120,27 @@ var a = (
       if (item.id === id) res = item;
     });
     return res;
-  },
+  };
 
   validator = {
     id: function (id) { return id && typeof id === 'string' },
-    descriprion: function (descriprion) { descriprion && typeof descriprion === 'string' },
-    createdAt: function (createdAt) { createdAt && typeof createdAt.getMonth === 'function' },
-    author: function (author) { author && typeof author === 'string' },
-    photoLink: function (photoLink) { photoLink && typeof photoLink === 'string' },
-  },
+    description: function (description) { return description && typeof description === 'string' },
+    createdAt: function (createdAt) { return createdAt && typeof createdAt.getMonth === 'function' },
+    author: function (author) { return author && typeof author === 'string' },
+    photoLink: function (photoLink) { return photoLink && typeof photoLink === 'string' },
+  };
 
   function validatePhotoPost(obj) {
     var res = true;
-    Object.keys(obj).forEach(key => {
+    Object.keys(validator).forEach(key => {
       if (!validator[key](obj[key])) res = false;
-    })
+    });
+    Object.keys(obj).forEach(key => {
+      if (!validator[key]) res = false;
+    });
     return res;
-  },
+  };
+  
 
   function addPhotoPost(post) {
     if (post.validatePhotoPost() === true) {
@@ -144,7 +148,7 @@ var a = (
       return true;
     }
     return false;
-  },
+  };
 
   function editPhotoPost(id, post) {
     if (!validatePhotoPost(post)) return false;
@@ -157,7 +161,7 @@ var a = (
       return item;
     })
     return true;
-  },
+  };
 
   function removePhotoPost(id) {
     var index = -1;
@@ -167,5 +171,16 @@ var a = (
       }
     });
     photoPosts.splice(index, 1);
+  };
+
+  return {
+    getPhotoPosts,
+    getPhotoPost,
+    validatePhotoPost,
+    addPhotoPost,
+    editPhotoPost,
+    removePhotoPost
   }
-)();
+
+}());
+
