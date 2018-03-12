@@ -190,8 +190,10 @@ header {
 }
 
 .post-but {
-    width: 100%;
-    margin: auto 0.5rem;
+    width: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -203,6 +205,13 @@ header {
 .post-but span:hover {
     text-shadow: 0px 0px 5px rgba(255,255,255,0.75);
     cursor: pointer;
+}
+
+.date{
+    margin: auto auto;
+}
+.date span{
+    padding-right: 0.3rem;
 }
 
 .like{

@@ -35,12 +35,13 @@
             <span>Friends' new photos</span>
         </div>
         
-        <div class="post"> 
+        <div class="post" id="1"> 
             <div class='post-name'><span>Name</span></div>
             <div class='post-content'>
                     <img src="assets/01.jpg"></img> 
                     <div class="post-desc">
                         <span>Doge</span>
+        
                         <div class="hashtags">
                             <span class="hashtag">#WOW</span>
                             <span class="hashtag">#SUCH</span>
@@ -61,9 +62,10 @@
             </div>
             <div class='post-footer'>
                 <div class='post-but'>
-                    <div class='edit'><span>Edit</span></div>
-                    <div class='delete'><span>Delete</span></div>
+                    <button class='edit' onclick="editPhotoPost(id, post)"><span>Edit</span></button>
+                    <button class='delete' onclick="removePhotoPost(id)"><span>Delete</span></button>
                 </div>
+                <div class='date'> <span type='date'>12.03.2018</span></div>
                 <div class='like'><img src="assets/like.png"></img></div>
             </div>
         </div>    

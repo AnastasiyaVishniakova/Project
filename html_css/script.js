@@ -2,7 +2,7 @@ var utils = (function(){
   photoPosts = [
     {
       id: '1',
-      description: 'Я в Турции',
+      description: 'Doge',
       createdAt: new Date('2017-02-23T23:00:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\01.jpg'
@@ -10,90 +10,34 @@ var utils = (function(){
 
     {
       id: '2',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2016-01-23T23:10:00'),
+      description: 'Doge',
+      createdAt: new Date('2016-01-23T22:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\02.jpg'
     },
 
     {
       id: '3',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2018-01-23T23:10:00'),
+      description: 'Doge',
+      createdAt: new Date('2018-01-23T23:50:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\03.jpg'
     },
 
     {
       id: '4',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2015-01-23T23:10:00'),
+      description: 'Doge',
+      createdAt: new Date('2015-01-23T11:10:00'),
       author: 'Вишнякова Анастасия',
       photoLink: 'E:\УП\html_css\assets\04.jpg'
     },
 
     {
       id: '5',
-      description: 'Я в Турции',
-      createdAt: new Date('2017-02-23T23:00:00'),
+      description: 'Doge',
+      createdAt: new Date('2017-02-23T23:05:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\01.jpg'
-    },
-
-    {
-      id: '6',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2016-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\02.jpg'
-    },
-
-    {
-      id: '7',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2018-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\03.jpg'
-    },
-
-    {
-      id: '8',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2015-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\04.jpg'
-    },
-
-    {
-      id: '9',
-      description: 'Я в Турции',
-      createdAt: new Date('2017-02-23T23:00:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\01.jpg'
-    },
-
-    {
-      id: '10',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2016-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\02.jpg'
-    },
-
-    {
-      id: '11',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2018-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\03.jpg'
-    },
-
-    {
-      id: '12',
-      description: 'Я дома в шапке',
-      createdAt: new Date('2015-01-23T23:10:00'),
-      author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\04.jpg'
+      photoLink: 'E:\УП\html_css\assets\05.jpg'
     }
   ];
 
