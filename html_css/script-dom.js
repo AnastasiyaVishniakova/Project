@@ -1,84 +1,91 @@
 var b= (function(){
-    function getPhotoPosts(skip = 0, top = 10, filterConfig) {
-       var array = utils.getPhotoPosts(skip, top, filterConfig);
+    var ARCTICLE_TEMPLATE;
 
-       var containerMain = document.querySelector('div.main');
-       for(let i=0; i < photoPosts.length; ++i) {
-        let node = photoPosts[i];
-        containerMain.removeChild(node);
-    }
-    
-     for(let i=0; i < array.length; ++i) {
-        let node = array[i];
-        addPhotoPost(node);
-    }
-
+    function renderPhotos(skip = 0, top = 10, filterConfig) {
+        
+        let main = document.querySelector('.main');
+        main.textContent = '';
+        ARCTICLE_TEMPLATE = document.querySelector('#post-template');
+        utils.getPhotoPosts(skip, top, filterConfig).forEach(post => {
+            var tmp = ARCTICLE_TEMPLATE;   
+            tmp.content.querySelector('.post').dataset.id = post.id;
+            tmp.content.querySelector('.author').textContent = post.author;
+            tmp.content.querySelector('.post-content-image').src = post.photoLink;
+            tmp.content.querySelector('.description').textContent = post.description;
+            tmp.content.querySelector('.date-content').textContent = formatDate(post.createdAt);
+            let t = tmp.content.querySelector('.hashtags');
+            if(post.tags) {
+                post.tags.forEach(element => {
+                    let a = document.createElement('span');
+                    a.textContent = element;
+                    t.appendChild(a);
+                });
+            }
+            main.appendChild(tmp.content.cloneNode(true)); 
+        });
     };
 
-    function getPhotoPost(id) {
-        utils.getPhotoPost(id);
-    };
-
-    function validatePhotoPost(obj) {
-        utils.validatePhotoPost(obj);
-    };
-
+    function formatDate(d) {
+		return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + ' ' +
+		d.getHours() + ':' + d.getMinutes();
+	}
+   
     function addPhotoPost(post) {
         utils.addPhotoPost(post);
-
-        //Будет ли этот фото пост выглядеть, как уже созданные с помощью html и css? C кнопками edit, delete, лайком и т.д.?
-        var containerMain = document.querySelector('div.main');
-        var postContainer = containerMain.createElement('div.post');
-        var author = postContainer.createElement('div.post-name');
-        author.textContent = post[author];
-
-        var postContent = postContainer.createElement('div.post-content');
-        var link = postContent.createElement('img');
-        link.setAttribute(src, post[photoLink]);
-
-        var descripContainer = postContent.createElement('div.post-desc');
-        var descrip = descripContainer.createElement('span');
-        descrip.textContent = post[description];
-
-        var footer = postContainer.createElement('div.post-footer');
-        var date = footer.createElement('div.date');
-        
-        date.textContent = (new Date()).toString();
-
-        containerMain.appendChild(postContainer);
+        renderPhotos();
     };
 
     function editPhotoPost(id, post) {
-        utils.editPhotoPost(id, post);
+        if(!utils.editPhotoPost(id, post)) return false;
        
-       var container = document.querySelector('div.main');
-       var post = container.getElementById(id);
-       var box = post.querySelector('div.post-name');
-       var name = box.getElementByTagName("span");
-       name.textContent = photoPosts[author];
+        var postp = document.getElementById(id);
+        var box = postp.querySelector('div.post-name');
+        var name = box.getElementsByClassName("author")[0];
+        if(post["author"]){
+            name.textContent = post["author"];
+       }
 
-       var descripContainer = post.querySelector('div.post-desc');
-       var descrip = descripContainer.getElementByTagName("span");
-       descrip.textContent = photoPosts[description];
+       var Cont = postp.querySelector('div.post-content');
+       var descripContainer = Cont.querySelector('div.post-desc');
+       var descrip = descripContainer.getElementsByClassName("description")[0];
+       if(post["description"]){
+        descrip.textContent = post["description"];
+       }
+       
 
-       var footer = post.querySelector('div.post-footer');
+       var footer = postp.querySelector('div.post-footer');
        var dateContainer = footer.querySelector('div.date');
-       var date = dateContainer.getElementByTagName("span");
-       date.textContent = photoPosts[createdAt];
+       var date = dateContainer.getElementsByTagName("span")[0];
+       if(post["createdAt"]){
+        date.textContent = post["createdAt"];
+       }
 
-       var photoContainer = post.querySelector('div.post-content');
-       var photo = photoContainer.getElementByTagName("img");
-       photo.setAttribute("src", photoPosts[photoLink]);
+       var photo = Cont.getElementsByTagName("img")[0];
+       if(post["photoLink"]){
+       photo.setAttribute("src", post["photoLink"]);
+       }
+
+       return true;
     };
 
     function removePhotoPost(id) {
         utils.removePhotoPost(id);
-        var containerMain = document.querySelector('div.main');
-        var postContainer = containerMain.querySelector('div.post');
-        var post = postContainer.getElementById(id);
+       
+        let g = document.querySelector('div.main');
+        var post = document.getElementById(id);
 
-        post && containerMain.removeChild(post);
+        console.log(g);
+        console.log(post);
+        
+        
+        g.removeChild(post);
       };
 
+      return{
+          removePhotoPost: removePhotoPost,
+          editPhotoPost: editPhotoPost,
+          addPhotoPost: addPhotoPost,
+          renderPhotos: renderPhotos
+      }
 
-})()
+})();

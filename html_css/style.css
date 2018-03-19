@@ -190,12 +190,13 @@ header {
 }
 
 .post-but {
-    width: 20%;
+    width: 55px;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10.5rem;
     display: flex;
     flex-direction: column;
+    
 }
 
 .post-but span {

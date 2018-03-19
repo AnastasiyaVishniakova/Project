@@ -4,8 +4,14 @@
     <title> </title>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <link href="style.css" rel="stylesheet">
+    <link href="add-photo.css" rel="stylesheet">
+    <link href="error.css" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
+
+
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <script src="script.js"></script>
+    <script src="script-dom.js"></script>
 </head>
 
 <body>
@@ -25,7 +31,7 @@
                 <input id='date' type='date'>
             </div>
             <div id="login"><span>Login</span></div>
-            <div id="plus"><img src="assets/add-button.png"></img></div>
+            <button onclick=addPhotoPost(post) id="plus"><img src="assets/add-button.png"></img></button>
         </div>
         
 	</header>
@@ -35,172 +41,6 @@
             <span>Friends' new photos</span>
         </div>
         
-        <div class="post" id="1"> 
-            <div class='post-name'><span>Name</span></div>
-            <div class='post-content'>
-                    <img src="assets/01.jpg"></img> 
-                    <div class="post-desc">
-                        <span>Doge</span>
-        
-                        <div class="hashtags">
-                            <span class="hashtag">#WOW</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#SPACE</span>
-                            <span class="hashtag">#MORE</span>
-                            <span class="hashtag">#FAST</span>
-                            <span class="hashtag">#TOO</span>
-                            <span class="hashtag">#FRUIT</span>
-                            <span class="hashtag">#VERY</span>
-                            <span class="hashtag">#DOGE</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                        </div>
-                    </div>
-            </div>
-            <div class='post-footer'>
-                <div class='post-but'>
-                    <button class='edit' onclick="editPhotoPost(id, post)"><span>Edit</span></button>
-                    <button class='delete' onclick="removePhotoPost(id)"><span>Delete</span></button>
-                </div>
-                <div class='date'> <span type='date'>12.03.2018</span></div>
-                <div class='like'><img src="assets/like.png"></img></div>
-            </div>
-        </div>    
-         
-        <div class="post"> 
-            <div class='post-name'><span>Name</span></div>
-            <div class='post-content'>
-                    <img src="assets/02.jpg"></img> 
-                    <div class="post-desc">
-                        <span>Doge</span>
-                        <div class="hashtags">
-                            <span class="hashtag">#WOW</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#SPACE</span>
-                            <span class="hashtag">#MORE</span>
-                            <span class="hashtag">#FAST</span>
-                            <span class="hashtag">#TOO</span>
-                            <span class="hashtag">#FRUIT</span>
-                            <span class="hashtag">#VERY</span>
-                            <span class="hashtag">#DOGE</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                        </div>
-                    </div>
-            </div>
-            <div class='post-footer'>
-                <div class='post-but'>
-                    <div class='edit'><span>Edit</span></div>
-                    <div class='delete'><span>Delete</span></div>
-                </div>
-                <div class='like'><img src="assets/like.png"></img></div>
-            </div>
-        </div>
-
-        <div class="post"> 
-            <div class='post-name'><span>Name</span></div>
-            <div class='post-content'>
-                    <img src="assets/03.jpg"></img> 
-                    <div class="post-desc">
-                        <span>Doge</span>
-                        <div class="hashtags">
-                            <span class="hashtag">#WOW</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#SPACE</span>
-                            <span class="hashtag">#MORE</span>
-                            <span class="hashtag">#FAST</span>
-                            <span class="hashtag">#TOO</span>
-                            <span class="hashtag">#FRUIT</span>
-                            <span class="hashtag">#VERY</span>
-                            <span class="hashtag">#DOGE</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                        </div>
-                    </div>
-            </div>
-            <div class='post-footer'>
-                <div class='post-but'>
-                    <div class='edit'><span>Edit</span></div>
-                    <div class='delete'><span>Delete</span></div>
-                </div>
-                <div class='like'><img src="assets/like.png"></img></div>
-            </div>
-        </div>
-
-        <div class="post"> 
-            <div class='post-name'><span>Name</span></div>
-            <div class='post-content'>
-                    <img src="assets/04.jpg"></img> 
-                    <div class="post-desc">
-                        <span>Doge</span>
-                        <div class="hashtags">
-                            <span class="hashtag">#WOW</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#SPACE</span>
-                            <span class="hashtag">#MORE</span>
-                            <span class="hashtag">#FAST</span>
-                            <span class="hashtag">#TOO</span>
-                            <span class="hashtag">#FRUIT</span>
-                            <span class="hashtag">#VERY</span>
-                            <span class="hashtag">#DOGE</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                        </div>
-                    </div>
-            </div>
-            <div class='post-footer'>
-                <div class='post-but'>
-                    <div class='edit'><span>Edit</span></div>
-                    <div class='delete'><span>Delete</span></div>
-                </div>
-                <div class='like'><img src="assets/like.png"></img></div>
-            </div>
-        </div>
-
-        <div class="post"> 
-            <div class='post-name'><span>Name</span></div>
-            <div class='post-content'>
-                    <img src="assets/05.jpg"></img> 
-                    <div class="post-desc">
-                        <span>Doge</span>
-                        <div class="hashtags">
-                            <span class="hashtag">#WOW</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#SPACE</span>
-                            <span class="hashtag">#MORE</span>
-                            <span class="hashtag">#FAST</span>
-                            <span class="hashtag">#TOO</span>
-                            <span class="hashtag">#FRUIT</span>
-                            <span class="hashtag">#VERY</span>
-                            <span class="hashtag">#DOGE</span>
-                            <span class="hashtag">#SUCH</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                            <span class="hashtag">#TAG</span>
-                        </div>
-                    </div>
-            </div>
-            <div class='post-footer'>
-                <div class='post-but'>
-                    <div class='edit'><span>Edit</span></div>
-                    <div class='delete'><span>Delete</span></div>
-                </div>
-                <div class='like'><img src="assets/like.png"></img></div>
-            </div>
-        </div>
     </div>
 	
 	
@@ -233,6 +73,71 @@
 			</a>
 		</div>
 	</div>
-	
 </body>
+
+<template id='post-template'>
+    <div class='post'> 
+        <div class='post-name'><span class='author'>Имя пользователя</span></div>
+        <div class='post-content'>
+                <img class='post-content-image' src=""></img> 
+                <div class="post-desc">
+                    <span class='description'>Описание</span>
+                    <div class="hashtags">
+                        <span class="hashtag">Тэги</span>
+                    </div>
+                </div>
+        </div>
+        <div class='post-footer'>
+            <div class='post-but'>
+                <button class='edit' onclick="editPhotoPost(id, post)"><span>Edit</span></button>
+                <button class='delete' onclick="removePhotoPost(id)"><span>Delete</span></button>
+            </div>
+            <div class='date'> <span class='date-content' type='date'>Дата</span></div>
+            <div class='like'><img src="assets/like.png"></img></div>
+        </div>
+    </div>
+</template>
+
+<template id='login-template'>
+    <div class="log-content">
+        <span>Log in</span>
+        <div class="input-info">
+            <input id='login-input' placeholder='Login' type='text'>
+            <input id='password-input' placeholder='Password' type='password'>
+        </div>
+        <div class="ok">
+                <img src="assets/ok.png"></img>
+        </div>
+     </div>
+</template>
+
+<template id='error-template'>
+    <div class="error-content">
+        <div class="error-text">
+                <span>Something went wrong...</span>
+        </div>
+        <div class="error-text-small">
+            <span>*Text of error*</span>
+        </div>
+        <div class="return">
+             <img src="assets/22530-return-button-svg.svg"></img>
+        </div>
+    </div>
+</template>
+
+<template id='add-photo-template'>
+    <div class="add-photo">
+        <input name="myFile" type="file">
+    </br>
+        <h2>Description</h2>
+        <div class='description-container'>
+            <textarea id='description-input' ></textarea>	
+        </div>
+
+        <h3>#TAGS</h3>
+        <div class='hashtags-container'>
+            <textarea id='hashtags-input'></textarea>
+        </div>
+    </div>
+</template>
 </html>

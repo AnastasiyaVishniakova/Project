@@ -3,41 +3,46 @@ var utils = (function(){
     {
       id: '1',
       description: 'Doge',
+      tags: ['#tag', '#123'],
       createdAt: new Date('2017-02-23T23:00:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\01.jpg'
+      photoLink: 'assets/01.jpg'
     },
 
     {
       id: '2',
       description: 'Doge',
+      tags: ['#tag', '#123'],
       createdAt: new Date('2016-01-23T22:10:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\02.jpg'
+      photoLink: 'E:/УП/html_css/assets/02.jpg'
     },
 
     {
       id: '3',
       description: 'Doge',
+      tags: ['#tag', '#123'],
       createdAt: new Date('2018-01-23T23:50:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\03.jpg'
+      photoLink: 'E:/УП/html_css/assets/03.jpg'
     },
 
     {
       id: '4',
       description: 'Doge',
+      tags: ['#tag', '#123'],
       createdAt: new Date('2015-01-23T11:10:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\04.jpg'
+      photoLink: 'E:/УП/html_css/assets/04.jpg'
     },
 
     {
       id: '5',
       description: 'Doge',
+      tags: ['#tag', '#123'],
       createdAt: new Date('2017-02-23T23:05:00'),
       author: 'Вишнякова Анастасия',
-      photoLink: 'E:\УП\html_css\assets\05.jpg'
+      photoLink: 'E:/УП/html_css/assets/05.jpg'
     }
   ];
 
@@ -67,8 +72,11 @@ var utils = (function(){
   };
 
   validator = {
-    id: function (id) { return id && typeof id === 'string' },
     description: function (description) { return description && typeof description === 'string' },
+    tags: function (tags) {
+       if(tags) return tags instanceof array && tags.every(element => typeof element === 'string');
+       return true;
+     },
     createdAt: function (createdAt) { return createdAt && typeof createdAt.getMonth === 'function' },
     author: function (author) { return author && typeof author === 'string' },
     photoLink: function (photoLink) { return photoLink && typeof photoLink === 'string' },
@@ -87,7 +95,8 @@ var utils = (function(){
   
 
   function addPhotoPost(post) {
-    if (post.validatePhotoPost() === true) {
+    if (utils.validatePhotoPost(post)) {
+      post.id = photoPosts[photoPosts.length - 1].id + 1;
       photoPosts.push(post);
       return true;
     }
@@ -95,7 +104,7 @@ var utils = (function(){
   };
 
   function editPhotoPost(id, post) {
-    if (!validatePhotoPost(post)) return false;
+    //if (!validatePhotoPost(post)) return false;
     photoPosts = photoPosts.map(function (item) {
       if (item.id === id) {
         Object.keys(post).forEach(function (key) {
@@ -109,12 +118,19 @@ var utils = (function(){
 
   function removePhotoPost(id) {
     var index = -1;
-    photoPosts = photoPosts.forEach(function (item, i) {
+    var template = photoPosts;
+    template = template.forEach(function (item, i) {
       if (item.id === id) {
         index = i;
       }
     });
-    photoPosts.splice(index, 1);
+    if(index != -1){
+      photoPosts.splice(index, 1);
+    }
+    else{
+      return false;
+    }
+    return true;
   };
 
   return {
@@ -123,7 +139,8 @@ var utils = (function(){
     validatePhotoPost,
     addPhotoPost,
     editPhotoPost,
-    removePhotoPost
+    removePhotoPost,
+    size: photoPosts.length,
   }
 
 }());
