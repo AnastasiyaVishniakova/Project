@@ -1,31 +1,41 @@
+let fs = require('fs');
+
 const Utils = function(photoPosts){
   function getPhotoPosts(skip = 0, top = 10, filterConfig) {
     let arr = photoPosts;
-    console.log(filterConfig);
+    if(!filterConfig || (filterConfig.author == '' && filterConfig.tags.length == 0 && filterConfig.createdAt === '')) filterConfig = undefined;
 
-    if (filterConfig && filterConfig.author) {
+    if (filterConfig && filterConfig.author !== '') {
+      console.log(filterConfig);
       arr = arr.filter(function (a) {
         return a.author === filterConfig.author;
-      })
-      
+      });
     }
-    if(filterConfig && filterConfig.tags){
-
+    
+    if(filterConfig && filterConfig.tags.length != 0){
+     
       arr = arr.filter(function (a) {
         for (var i = 0; i < a.tags.length; i++) {
            if( a.tags[i] === filterConfig.tags[0]){
              return true;
            }
         }
-      })
-
+        return false;
+      });
     }
-
+    /*
+    if(filterConfig && filterConfig.createdAt !== ''){     
+      var date = new Date(filterConfig.createdAt);
+      arr = arr.filter(function (a) {
+        return valueOf(a.createdAt) === valueOf(date);
+      });
+    }
+    */
     arr = arr.slice(skip, skip + top);
     arr.sort(function (a, b) {
       return (a.createdAt > b.createdAt) ? 1 : (a.createdAt < b.createdAt) ? -1 : 0;
     });
-
+    
     return arr;
   };
 
@@ -60,10 +70,14 @@ const Utils = function(photoPosts){
   };
   
 
-  function addPhotoPost(post) {
+  function addPhotoPost(post, file) {
+    post.photoLink = '/assets/' + post.photoLink;
     if (validatePhotoPost(post)) {
       post.id = photoPosts[photoPosts.length - 1].id + 1;
+      post.photoLink = `/assets/${post.id}.${require('mime').extension(file.mimetype)}`;
+      fs.writeFile('public' + post.photoLink, file.buffer, (err) => console.log(err));
       photoPosts.push(post);
+      fs.writeFile('./server/data/posts.json', JSON.stringify(photoPosts),'utf8');
       return true;
     }
     return false;
@@ -78,7 +92,8 @@ const Utils = function(photoPosts){
         });
       }
       return item;
-    })
+    });
+    fs.writeFile('./server/data/posts.json', JSON.stringify(photoPosts),'utf8');
     return true;
   };
 
@@ -96,6 +111,7 @@ const Utils = function(photoPosts){
     else{
       return false;
     }
+    fs.writeFile('./server/data/posts.json', JSON.stringify(photoPosts),'utf8');
     return true;
   };
 

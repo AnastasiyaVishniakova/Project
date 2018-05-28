@@ -6,10 +6,8 @@ const Utils = require('./utils.js');
 let fs = require('fs');
 const app = express();
 
-app.use(express.static(__dirname));
-
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static('public'));  
 
 let posts = JSON.parse(fs.readFileSync('./server/data/posts.json','utf8'), function(key, value){
   if(key === 'createdAt'){
@@ -25,7 +23,7 @@ const data = Utils(posts);
 
 //работает через фидлер
 app.post('/photoPosts', (req,res) => {
-  //console.log(req.body);
+  console.log(req.body);
   let arr = data.getPhotoPosts(req.query.skip, req.query.top, req.body);
   arr ? res.send(arr) : res.status(404).end();
   res.status(200).end();
@@ -36,10 +34,10 @@ app.get('/photoPost', (req, res) => {
   post ? res.send(post) : res.status(404).end();
 });
 
-
-app.post('/addPhotoPost', (req, res) => {
-  data.addPhotoPost(req.body);
-  console.log(data.getPhotoPosts().length);
+app.post('/addPhotoPost', upload.single('file'), (req, res) => {
+  const post = JSON.parse(req.body.post);
+  data.addPhotoPost(post, req.file);
+  console.log(data.getPhotoPosts()[data.getPhotoPosts().length - 1]);
   res.status(200).end();
 });
 
@@ -56,5 +54,9 @@ app.delete('/removePhotoPost', (req,res) => {
 
 app.listen('5000', () => {
   console.log('Server is running');
+});
+
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
 });
 

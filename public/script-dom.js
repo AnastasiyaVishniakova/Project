@@ -1,9 +1,9 @@
 
 var b = (function(){
-    var POST_TEMPLATE;
+    let POST_TEMPLATE;
     let skip = 0;
 
-    let filterConfig = {};
+    let filterConfig = {tags: []};
     
 
     let more = document.getElementById('more');
@@ -32,15 +32,18 @@ var b = (function(){
         let authorF = document.getElementById('name');
         filterConfig['author'] = authorF.value;
         let tags = document.getElementById('hashtag');
-        var tagString = tags.value;
+        let tagString = tags.value;
         if(tagString){
             filterConfig['tags'][0] = tagString;
         }
-        
+        let day = document.getElementById('date');
+        filterConfig['createdAt'] = day.valueAsDate;
+
         return new Promise(function(resolve, reject) {
             let xhr = new XMLHttpRequest();
             let params = 'skip=' + 0 + '&top=' + skip;
             xhr.open('POST','/photoPosts?'+params,true); //запрос на сервер
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload=function() {
                 if(this.status === 200){
                     resolve(this.response);
@@ -74,17 +77,18 @@ var b = (function(){
 
         POST_TEMPLATE = document.querySelector('#post-template');
         posts.forEach(post => {
-            var tmp =   POST_TEMPLATE;   
+            let tmp =   POST_TEMPLATE;   
             tmp.content.querySelector('.post').dataset.id = post.id;
             tmp.content.querySelector('.author').textContent = post.author;
             tmp.content.querySelector('.post-content-image').src = post.photoLink;
             tmp.content.querySelector('.description').textContent = post.description;
             tmp.content.querySelector('.date-content').textContent = formatDate(post.createdAt);
             let t = tmp.content.querySelector('.hashtags');
+            t.textContent = '';
             if(post.tags) {
                 post.tags.forEach(element => {
                     let a = document.createElement('span');
-                    a.textContent = element;
+                    a.textContent = '#' + element;
                     t.appendChild(a);
                 });
             }
@@ -112,40 +116,35 @@ var b = (function(){
 
 
     function sendPost(){
-        let postTemp={tags: []};
+        const postTemp={tags: []};
+        
+        const input = document.querySelector('.select-file');
+        const formData = new FormData();
+        formData.append('file', input.files[0]);
 
-        let input = document.querySelector('.select-file');
-        postTemp['photoLink'] = input.value;
         //если нет ссылки, то экран ошибки или оповещение
-        let description = document.querySelector('.description-input');
+        const description = document.querySelector('.description-input');
         postTemp['description'] = description.value;
-        let tags = document.querySelector('.hashtags-input');
+        const tags = document.querySelector('.hashtags-input');
 
-        var tagString = tags.value;
+        const tagString = tags.value;
         postTemp['createdAt'] = new Date();
         postTemp['author'] = 'Вишнякова Анастасия';
-        var arr = tagString.split('# ');
+        const arr = tagString.split('# ');
 
-        for (var i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             postTemp['tags'].push(arr[i]);
         }
-        //resolve - 'удачное обещание', reject - 'неудачное обещание'
-        var promise = new Promise(function(resolve, reject) {
+
+        formData.append('post', JSON.stringify(postTemp));
+        
+        const promise = new Promise(function(resolve, reject) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST','/addPhotoPost',true); //запрос на сервер
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onload=function() {
-                if(this.status === 200){
-                    resolve(this.response);
-                }else{
-                    let error = new Error(this.statusText);
-                    error.code = this.status;
-                    reject(error);
-                }
+            xhr.open('POST', '/addPhotoPost', true); //запрос на сервер
+            xhr.onload = () => {
+                resolve();
             };
-            xhr.send(JSON.stringify(postTemp));
-           
-            //loadMainPage();
+            xhr.send(formData);
         });
         promise.then(loadMainPage);
     };
